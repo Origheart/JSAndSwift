@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>测试iOS与JS的互相调用</title>
+	<style type="text/css">
+	  * {
+	  	font-size: 40px;
+	  }
+	</style>
+</head>
+
+<body>
+  
+<div style="margin-top: 100px">
+	<h1>测试iOS与JS之间的互相调用</h1>
+	<input type="button" value="调用系统摄像头" onclick="SwiftJSModel.callSystemCamera()">
+    <br/>
+    <br/>
+	<input type="button" value="弹出原生提示框" onclick="SwiftJSModel.showAlertMsg('js标题', 'js message')">
+</div>
+<br/>
+<div>
+	<input type="button" value="调用Swift方法" onclick="SwiftJSModel.callWithDict({'name': 'testname', 'age': 10, 'height': 170})">
+    <br/>
+    <br/>
+	<input type="button" value="调用Swift方法，Swift调用JS方法并传参" onclick="SwiftJSModel.jsCallObjcAndObjcCallJsWithDict({'name': '刘康', 'age': 28, 'height': 170})">
+</div>
+<br/>
+<div>
+	<span id="jsParamFuncSpan" style="color: red; font-size: 50px;"></span>
+</div>
+
+<script type="text/javascript">
+    function jsFunc() {
+        alert('调用JS弹窗');
+    }
+    // 注意哦，如果JS写错，可能在OC调用JS方法时，都会出错哦。
+    var jsParamFunc = function(argument) {
+        document.getElementById('jsParamFuncSpan').innerHTML = argument['name'];
+    }
+</script>
+</body>
+</html>
